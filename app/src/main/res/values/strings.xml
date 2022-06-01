@@ -4,4 +4,12 @@
     <string name="email">Email</string>
     <string name="login">LOGIN</string>
     <string name="don_t_have_an_account_signup">Don\'t have an account?<u>SIGNUP</u></string>
+    <string name="errorEmail">Email is required</string>
+    <string name="errorPassword">Password is required</string>
+    <string name="Login">don_t_have_an_account_Login</string>
+    <string name="signup">SIGNUP</string>
+    <string name="second_name">Second Name</string>
+    <string name="first_name">First Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="Login2">Already have an account? Login</string>
 </resources>
