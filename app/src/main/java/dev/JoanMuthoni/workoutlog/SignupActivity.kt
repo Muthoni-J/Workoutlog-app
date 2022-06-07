@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.util.regex.Pattern
 
 class SignupActivity : AppCompatActivity() {
     lateinit var tvSingUp:TextView
@@ -49,7 +50,7 @@ class SignupActivity : AppCompatActivity() {
 
     }
 
-    fun validate(){
+    fun validate() {
         var firstname = etFirstname.text.toString()
         var secondname = etSecondname.text.toString()
         var email2 = etEmail2.text.toString()
@@ -60,16 +61,18 @@ class SignupActivity : AppCompatActivity() {
 
 
 
-        if (firstname.isBlank()){
+        if (firstname.isBlank()) {
             tilFirstname.error = "Enter your first name"
         }
-        if (secondname.isBlank()){
+        if (secondname.isBlank()) {
             tilFirstname.error = "Enter your  second name"
         }
-        if (email2.isBlank()){
-             tilEmail2.error = "Enter your  second name"
-         }
-
+        if (email2.isBlank()) {
+            tilEmail2.error = "Enter your  second name"
+        }
+//        if (!Pattern.EMAIL.matcher(email).matchers()){
+//        tilEmail2.error = "Enter your  second name"
+//    }
         if (password2.isBlank()){
             tilPassword2.error = "Enter your  second name"
         }
@@ -77,7 +80,9 @@ class SignupActivity : AppCompatActivity() {
         if (confirmpassword.isBlank()){
             tilConfirmpassword.error = "Enter your  second name"
         }
-
+        if (confirmpassword!=password2){
+            tilConfirmpassword.error = "Wrong password"
+        }
 
     }
 }
