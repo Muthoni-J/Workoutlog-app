@@ -31,10 +31,13 @@ class LoginActivity : AppCompatActivity() {
         tvSingUp.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
+
         }
 
         btnLogin.setOnClickListener {
             validate()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         }
 
     }

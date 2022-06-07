@@ -3,6 +3,7 @@ package dev.JoanMuthoni.workoutlog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
@@ -10,14 +11,14 @@ import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
 
 class SignupActivity : AppCompatActivity() {
-    lateinit var tvSingUp:TextView
+    lateinit var tvSingUp: TextView
     lateinit var etFirstname: TextInputEditText
     lateinit var etSecondname: TextInputEditText
     lateinit var tilFirstname: TextInputLayout
     lateinit var tilSecondname: TextInputLayout
     lateinit var etEmail2: TextInputEditText
     lateinit var etPassword2: TextInputEditText
-    lateinit var etConfirmpassword:TextInputEditText
+    lateinit var etConfirmpassword: TextInputEditText
     lateinit var tilEmail2: TextInputLayout
     lateinit var tilPassword2: TextInputLayout
     lateinit var tilConfirmpassword: TextInputLayout
@@ -46,6 +47,7 @@ class SignupActivity : AppCompatActivity() {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
             validate()
+
         }
 
     }
@@ -70,17 +72,17 @@ class SignupActivity : AppCompatActivity() {
         if (email2.isBlank()) {
             tilEmail2.error = "Enter your  second name"
         }
-//        if (!Pattern.EMAIL.matcher(email).matchers()){
-//        tilEmail2.error = "Enter your  second name"
-//    }
-        if (password2.isBlank()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email2).matches()) {
+            tilEmail2.error = "Enter your  second name"
+        }
+        if (password2.isBlank()) {
             tilPassword2.error = "Enter your  second name"
         }
 
-        if (confirmpassword.isBlank()){
+        if (confirmpassword.isBlank()) {
             tilConfirmpassword.error = "Enter your  second name"
         }
-        if (confirmpassword!=password2){
+        if (confirmpassword != password2) {
             tilConfirmpassword.error = "Wrong password"
         }
 
