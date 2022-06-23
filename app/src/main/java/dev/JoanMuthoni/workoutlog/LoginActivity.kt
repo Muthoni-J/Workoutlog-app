@@ -7,34 +7,24 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import dev.JoanMuthoni.workoutlog.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var tvSingUp: TextView
-    lateinit var etEmail: TextInputEditText
-    lateinit var etPassword: TextInputEditText
-    lateinit var tilEmail: TextInputLayout
-    lateinit var tilPassword: TextInputLayout
-    lateinit var btnLogin: Button
+    lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        tvSingUp = findViewById(R.id.tvSignUp)
-        etEmail = findViewById(R.id.etEmail2)
-        etPassword = findViewById(R.id.etPassword2)
-        tilEmail = findViewById(R.id.tilEmail2)
-        tilPassword = findViewById(R.id.tilPassword2)
-        btnLogin = findViewById(R.id.btnLogin)
+        binding=ActivityLoginBinding.inflate(layoutInflater)
+       setContentView(binding.root)
 
 
 
-
-        tvSingUp.setOnClickListener {
+        binding.tvSignUp.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
 
         }
 
-        btnLogin.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             validate()
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
@@ -43,16 +33,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun validate() {
-        var email = etEmail.text.toString()
-        var password = etPassword.text.toString()
+        var email = binding.etEmail2.text.toString()
+        var password = binding.etPassword2.text.toString()
 
 
         if (email.isBlank()){
-            tilEmail.error = "@string/errorEmail"
+            binding.tilEmail2.error = "@string/errorEmail"
         }
 
         if (password.isBlank()){
-            tilPassword.error = "@string/errorPassword"
+            binding.tilPassword2.error = "@string/errorPassword"
         }
 
 
