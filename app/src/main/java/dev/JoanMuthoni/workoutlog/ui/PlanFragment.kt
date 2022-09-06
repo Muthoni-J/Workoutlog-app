@@ -1,10 +1,11 @@
-package dev.JoanMuthoni.workoutlog
+package dev.JoanMuthoni.workoutlog.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dev.JoanMuthoni.workoutlog.R
 
 
 class PlanFragment : Fragment() {
