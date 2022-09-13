@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         override fun onResume() {
             super.onResume()
             userViewModel.loginResponseLiveData.observe(this, Observer { loginResponse ->
-                persistLoginDetails(loginResponse!!)
+                persistLoginDetails(loginResponse !!)
                 Toast.makeText(baseContext, loginResponse?.message, Toast.LENGTH_LONG).show()
                 startActivity(Intent(baseContext, HomeActivity::class.java))
                 finish()
