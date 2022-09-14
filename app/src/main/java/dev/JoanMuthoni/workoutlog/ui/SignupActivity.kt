@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.google.android.material.textfield.TextInputLayout
 import dev.JoanMuthoni.workoutlog.ApiClient
 import dev.JoanMuthoni.workoutlog.ApiInterface
 import dev.JoanMuthoni.workoutlog.databinding.ActivitySignupBinding
 import dev.JoanMuthoni.workoutlog.models.RegisterRequest
 import dev.JoanMuthoni.workoutlog.models.RegisterResponse
+import dev.JoanMuthoni.workoutlog.viewmodel.UserViewModel
 import okhttp3.Response
 import retrofit2.Call
 import java.util.regex.Pattern
@@ -20,6 +22,7 @@ import javax.security.auth.callback.Callback
 class SignupActivity : AppCompatActivity() {
 
     lateinit var binding:ActivitySignupBinding
+    val userViewModel:UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,42 +87,13 @@ class SignupActivity : AppCompatActivity() {
         }
         if (!error) {
             binding.progressBar.visibility= View.VISIBLE
-            val RegisterRequest = RegisterRequest(firstname, secondname, phonenumber, email2, password2)
-            makeRegisterationRequest(RegisterRequest)
+            val registerRequest = RegisterRequest(firstname, secondname, phonenumber, email2, password2)
+            userViewModel.registerUser(registerRequest)
         }
     }
 
 
 
-fun makeRegisterationRequest(registerRequest: RegisterRequest){
-    var apiClient=ApiClient.buildApiClient(ApiInterface::class.java)
-    var request=apiClient.registerUser(registerRequest)
-    request.enqueue(object :retrofit2.Callback<RegisterResponse>{
-        override fun onResponse(
-            call: Call<RegisterResponse>,
-            response: retrofit2.Response<RegisterResponse>
-
-        ) {
-            binding.progressBar.visibility=View.GONE
-            if (response.isSuccessful){
-                var message=response.body()?.message
-                Toast.makeText(baseContext,message,Toast.LENGTH_LONG).show()
-
-            }else{
-                val error=response.errorBody()?.string()
-                Toast.makeText(baseContext,error,Toast.LENGTH_LONG).show()
-
-            }
-
-        }
-
-        override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-            Toast.makeText(baseContext,t.message,Toast.LENGTH_LONG).show()
-
-        }
-
-
-    }  )  }
 }
 
 

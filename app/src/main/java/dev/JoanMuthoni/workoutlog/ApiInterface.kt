@@ -1,6 +1,7 @@
 package dev.JoanMuthoni.workoutlog
 
 import dev.JoanMuthoni.workoutlog.models.LoginRequest
+import dev.JoanMuthoni.workoutlog.models.LoginResponse
 import dev.JoanMuthoni.workoutlog.models.RegisterRequest
 import dev.JoanMuthoni.workoutlog.models.RegisterResponse
 import retrofit2.Call
@@ -12,5 +13,5 @@ interface ApiInterface {
         @POST("/register")
         suspend fun registerUser(@Body registerRequest: RegisterRequest): Response<RegisterResponse>
         @POST("/login")
-        suspend fun loginUser(@Body loginRequest: LoginRequest)
+        suspend fun loginUser(@Body loginRequest: LoginRequest):Response<LoginResponse>
 }

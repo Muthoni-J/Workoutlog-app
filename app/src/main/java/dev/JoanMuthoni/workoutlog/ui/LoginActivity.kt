@@ -4,21 +4,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import dev.JoanMuthoni.workoutlog.ApiClient
-import dev.JoanMuthoni.workoutlog.ApiInterface
 import dev.JoanMuthoni.workoutlog.databinding.ActivityLoginBinding
 import dev.JoanMuthoni.workoutlog.models.LoginRequest
 import dev.JoanMuthoni.workoutlog.models.LoginResponse
-import dev.JoanMuthoni.workoutlog.models.RegisterRequest
-import dev.JoanMuthoni.workoutlog.models.RegisterResponse
-import dev.JoanMuthoni.workoutlog.usermodel.UserViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import dev.JoanMuthoni.workoutlog.viewmodel.UserViewModel
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -45,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
         override fun onResume() {
             super.onResume()
             userViewModel.loginResponseLiveData.observe(this, Observer { loginResponse ->
-                persistLoginDetails(loginResponse !!)
+                persistLoginDetails(loginResponse!!)
                 Toast.makeText(baseContext, loginResponse?.message, Toast.LENGTH_LONG).show()
                 startActivity(Intent(baseContext, HomeActivity::class.java))
                 finish()
@@ -77,9 +69,9 @@ class LoginActivity : AppCompatActivity() {
 
     fun persistLoginDetails(loginResponse: LoginResponse) {
         var editor = sharedPrefs.edit()
-        editor.putString("User_Id", LoginResponse.userId)
-        editor.putString("Access_Tools", LoginResponse.accessToken)
-        editor.putString("Profile_Id", LoginResponse.profileId)
+        editor.putString("User_Id", loginResponse.userId)
+        editor.putString("Access_Tools", loginResponse.accessToken)
+        editor.putString("Profile_Id", loginResponse.profileId)
         editor.apply()
     }
 }
